@@ -23,7 +23,6 @@ RUN apt-get update && apt-get install -y \
     tar \
     gzip \
     bzip2 \
-    openssh-server \
     runit \
     net-tools \
     iproute2 \
@@ -56,17 +55,6 @@ RUN apt-get update && apt-get install -y \
 
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
-RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-RUN mkdir -p /var/run/sshd
-
-RUN mkdir -p /etc/sv/sshd
-RUN cat > /etc/sv/sshd/run <<'EOF'
-#!/bin/sh
-exec /usr/sbin/sshd -D
-EOF
-RUN chmod +x /etc/sv/sshd/run
-RUN ln -s /etc/sv/sshd /etc/service/
-
 RUN mkdir -p /etc/sv/code-server
 RUN cat > /etc/sv/code-server/run <<'EOF'
 #!/bin/sh
@@ -77,6 +65,6 @@ RUN ln -s /etc/sv/code-server /etc/service/
 
 USER root
 
-EXPOSE 8080 22
+EXPOSE 8080
 
 CMD ["/bin/sh","-c","exec runsvdir -P /etc/service"]
