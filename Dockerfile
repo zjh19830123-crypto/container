@@ -20,30 +20,18 @@ RUN apt-get update && apt-get install -y \
     nano \
     zip \
     unzip \
-    tar \
     gzip \
     bzip2 \
     runit \
     unminimize \
     net-tools \
-    iproute2 \
     ca-certificates \
-    tzdata \
-    procps \
-    lsb-release \
-    less \
-    iputils-ping \
     traceroute \
     dnsutils \
     file \
-    tree \
     htop \
-    vim \
-    locales \
     software-properties-common \
     ncdu \
-    util-linux \
-    fdisk \
     telnet \
     tcpdump \
     rsync \
