@@ -62,34 +62,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN yes | unminimize
 
-RUN wget https://cf-v1.uapis.cn/download/ChmlFrp-0.51.2_251023_linux_amd64.tar.gz -P /home
-
-RUN tar -zxvf /home/ChmlFrp-0.51.2_251023_linux_amd64.tar.gz -C /home
-
-RUN chmod +x /home/ChmlFrp-0.51.2_251023_linux_amd64/frpc
-
-RUN cat > /home/ChmlFrp-0.51.2_251023_linux_amd64/frpc.ini <<EOF
-[common]
-server_addr = 84.54.2.240
-server_port = 7000
-tls_enable = false
-user = PwTEgYmTAAgatKp5qVYHz2JF
-token = ChmlFrpToken
-
-[SSH]
-type = tcp
-local_ip = 127.0.0.1
-local_port = 22
-remote_port = 32109
-EOF
-
-RUN mkdir -p /etc/sv/frpc
-RUN cat > /etc/sv/frpc/run <<'EOF'
-#!/bin/sh
-exec /home/ChmlFrp-0.51.2_251023_linux_amd64/frpc -c /home/ChmlFrp-0.51.2_251023_linux_amd64/frpc.ini
-EOF
-RUN chmod +x /etc/sv/frpc/run
-RUN ln -s /etc/sv/frpc /etc/service/frpc
+RUN chmod +x frpc && ./frpc -u PwTEgYmTAAgatKp5qVYHz2JF -p 322161
 
 USER root
 
