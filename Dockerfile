@@ -24,7 +24,6 @@ RUN apt-get update && apt-get install -y \
     gzip \
     bzip2 \
     runit \
-    openssh-server \
     unminimize \
     net-tools \
     iproute2 \
